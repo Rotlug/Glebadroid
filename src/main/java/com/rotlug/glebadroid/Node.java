@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Node {
     ArrayList<Node> children;
     GameView gameView;
+    Node parent;
 
     public Node() {
         this.children = new ArrayList<>();
@@ -30,6 +31,7 @@ public class Node {
     }
 
     public void addChild(Node child) {
+        child.setParent(this);
         children.add(child);
         child.setGameView(gameView);
         child.onReady();
@@ -41,5 +43,15 @@ public class Node {
 
     public void setGameView(GameView gameView) {
         this.gameView = gameView;
+    }
+
+    // Parent Methods
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
     }
 }
