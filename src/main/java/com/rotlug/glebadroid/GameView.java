@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.view.Choreographer;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ public class GameView extends View {
     private final Vector2 screenSize;
     private final int delayMs;
     private final int frameRate;
+
+    private MotionEvent touchEvent;
 
     public GameView(Context context, int frameRate) {
         super(context);
@@ -46,12 +49,26 @@ public class GameView extends View {
         choreographer.postFrameCallback(frameCallback);
     }
 
+    // Draw Cycle (Update)
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
         rootNode.update(canvas);
     }
 
+    // Touch events
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        this.touchEvent = event;
+        return super.onTouchEvent(event);
+    }
+
+    public MotionEvent getTouchEvent() {
+        return touchEvent;
+    }
+
+    // Other Getters
     public Node getRootNode() {
         return rootNode;
     }
