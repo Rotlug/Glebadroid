@@ -4,6 +4,9 @@ import android.graphics.Canvas;
 
 import java.util.ArrayList;
 
+/*
+`Node` is the base class for all other nodes
+ */
 public class Node {
     ArrayList<Node> children;
     GameView gameView;
