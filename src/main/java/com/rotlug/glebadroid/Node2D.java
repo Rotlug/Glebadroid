@@ -2,7 +2,6 @@ package com.rotlug.glebadroid;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 
 /*
 Node2D is a node that draws a bitmap on the canvas.
