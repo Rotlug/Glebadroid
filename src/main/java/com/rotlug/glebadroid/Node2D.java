@@ -8,7 +8,7 @@ Node2D is a node that draws a bitmap on the canvas.
 it also supports rotating the bitmap.
  */
 public class Node2D extends Node {
-    public Vector2 location;
+    public Vector2 position;
 
     private float rotation;
     private Vector2 size;
@@ -16,7 +16,7 @@ public class Node2D extends Node {
 
     @Override
     public void onReady() {
-        this.location = new Vector2(0, 0);
+        this.position = new Vector2(0, 0);
         this.rotation = 0;
         super.onReady();
     }
@@ -68,8 +68,8 @@ public class Node2D extends Node {
         state. this is more efficient than rotating the actual bitmap.
          */
         canvas.save();
-        canvas.rotate(rotation, location.x, location.y);
-        canvas.drawBitmap(bmp, location.x, location.y, null);
+        canvas.rotate(rotation, position.x, position.y);
+        canvas.drawBitmap(bmp, position.x, position.y, null);
         canvas.restore();
     }
 }
