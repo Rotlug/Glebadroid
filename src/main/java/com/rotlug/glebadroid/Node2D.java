@@ -51,13 +51,7 @@ public class Node2D extends Node {
         this.rotation = (rotation % 360);
     }
 
-    // Function that rotates the bitmap
-    private Bitmap getRotatedBitmap() {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(rotation);
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-    }
-
+    // Draw the bitmap
     @Override
     public void update(Canvas canvas) {
         if (bitmap == null) {
@@ -69,9 +63,14 @@ public class Node2D extends Node {
 
     public void draw(Canvas canvas) {
         Bitmap bmp = bitmap;
-        if (rotation != 0) {
-            bmp = getRotatedBitmap();
-        }
+
+        /*
+        Rotate the canvas, paint the picture, then restore the canvas to its original
+        state. this is more efficient than rotating the actual bitmap.
+         */
+        canvas.save();
+        canvas.rotate(rotation, location.x, location.y);
         canvas.drawBitmap(bmp, location.x, location.y, null);
+        canvas.restore();
     }
 }
