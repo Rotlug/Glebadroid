@@ -3,17 +3,22 @@ package com.rotlug.glebadroid;
 import android.graphics.Canvas;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 /*
 `Node` is the base class for all other nodes
  */
 public class Node {
-    ArrayList<Node> children;
-    GameView gameView;
-    Node parent;
+    private final ArrayList<Node> children;
+    private GameView gameView;
+    private Node parent;
+
+    Dictionary<String, ArrayList<Node>> signals;
 
     public Node() {
         this.children = new ArrayList<>();
+        this.signals = new Hashtable<>();
     }
 
     public void onReady() {
@@ -51,7 +56,6 @@ public class Node {
     }
 
     // Parent Methods
-
     public Node getParent() {
         return parent;
     }
@@ -59,4 +63,25 @@ public class Node {
     public void setParent(Node parent) {
         this.parent = parent;
     }
+
+    // Signals
+    public void connect(String signalName, Node dest) {
+        if (signals.get(signalName) == null) {
+            signals.put(signalName, new ArrayList<>());
+        }
+
+        signals.get(signalName).add(dest);
+    }
+
+    public void emit(String signalName) {
+        if (signals.get(signalName) == null) return;
+
+        ArrayList<Node> nodeList = signals.get(signalName);
+        for (int i = 0; i < nodeList.size(); i++) {
+            Node node = nodeList.get(i);
+            node.onSignal(signalName, this);
+        }
+    }
+
+    public void onSignal(String signalName, Node signalSource) {}
 }
