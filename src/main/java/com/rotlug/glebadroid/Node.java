@@ -33,11 +33,13 @@ public class Node {
         }
     }
 
-    public void addChild(Node child) {
+    public Node addChild(Node child) {
         child.setParent(this);
         children.add(child);
         child.setGameView(gameView);
         child.onReady();
+
+        return child;
     }
 
     public GameView getGameView() {
