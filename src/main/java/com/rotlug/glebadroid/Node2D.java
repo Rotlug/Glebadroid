@@ -2,6 +2,7 @@ package com.rotlug.glebadroid;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 
 /*
 Node2D is a node that draws a bitmap on the canvas.
@@ -10,7 +11,9 @@ it also supports rotating the bitmap.
 public class Node2D extends Node {
     public Vector2 position;
 
+    private int alpha;
     private float rotation;
+
     private Vector2 size;
     private Bitmap bitmap;
 
@@ -18,6 +21,8 @@ public class Node2D extends Node {
     public void onReady() {
         this.position = new Vector2(0, 0);
         this.rotation = 0;
+        this.alpha = 255;
+
         super.onReady();
     }
 
@@ -69,7 +74,24 @@ public class Node2D extends Node {
          */
         canvas.save();
         canvas.rotate(rotation, position.x, position.y);
-        canvas.drawBitmap(bmp, position.x, position.y, null);
+        if (alpha == 255) canvas.drawBitmap(bmp, position.x, position.y, null);
+        else drawWithOpacity(canvas);
         canvas.restore();
+    }
+
+
+    // Opacity
+    private void drawWithOpacity(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setAlpha(alpha);
+        canvas.drawBitmap(bitmap, position.x, position.y, paint);
+    }
+
+    public int getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(int alpha) {
+        this.alpha = (alpha % 256);
     }
 }
