@@ -52,6 +52,9 @@ public class Node2D extends Node {
     }
 
     public void setRotation(float rotation) {
+        if (rotation < 0) {
+            throw new RuntimeException("Error: rotation can't be set below 0");
+        }
         this.rotation = (rotation % 360);
     }
 
@@ -92,6 +95,9 @@ public class Node2D extends Node {
     }
 
     public void setAlpha(int alpha) {
+        if (alpha < 0) {
+            throw new RuntimeException("Error: Alpha can't be set below 0");
+        }
         this.alpha = (alpha % 256);
     }
 }
