@@ -18,8 +18,9 @@ public class GameView extends View {
     private final int frameRate;
 
     private MotionEvent touchEvent;
+    private final BackgroundColor bgRect;
 
-    public GameView(Context context, int frameRate) {
+    public GameView(Context context, int frameRate, int backgroundColor) {
         super(context);
         rootNode = new Node();
         rootNode.setGameView(this);
@@ -31,6 +32,9 @@ public class GameView extends View {
         // A Choreographer object is needed to make sure the game runs at the specified frame rate.
         Choreographer choreographer = Choreographer.getInstance();
         getFrameCallback(choreographer);
+
+        // Add Background Color
+        bgRect = (BackgroundColor) rootNode.addChild(new BackgroundColor(backgroundColor));
     }
 
     private void getFrameCallback(Choreographer choreographer) {
@@ -79,5 +83,27 @@ public class GameView extends View {
 
     public Vector2 getScreenSize() {
         return screenSize;
+    }
+
+    // Background Color
+
+    public void setBackgroundColor(int color) {
+        bgRect.setColor(color);
+    }
+
+    public int getBackgroundColor() {
+        return bgRect.getColor();
+    }
+}
+
+class BackgroundColor extends ColorRect {
+    public BackgroundColor(int color) {
+        super(color);
+    }
+
+    @Override
+    public void onReady() {
+        super.onReady();
+        setSize(getGameView().getScreenSize());
     }
 }
