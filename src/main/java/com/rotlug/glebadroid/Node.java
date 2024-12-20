@@ -64,6 +64,10 @@ public class Node {
         this.parent = parent;
     }
 
+    private ArrayList<Node> getChildren() {
+        return children;
+    }
+
     // Signals
     public void connect(String signalName, Node dest) {
         if (signals.get(signalName) == null) {
@@ -84,4 +88,12 @@ public class Node {
     }
 
     public void onSignal(String signalName, Node signalSource) {}
+
+    // Destroy node
+    public void destroySelf() {
+        this.onDestroy();
+        getParent().getChildren().remove(this);
+    }
+
+    public void onDestroy() {}
 }
