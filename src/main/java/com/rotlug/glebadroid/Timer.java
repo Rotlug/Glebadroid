@@ -16,7 +16,7 @@ public class Timer extends Node {
         if (isActive) {
             if (timeLeft == 0) {
                 isActive = false;
-                emit("timeout");
+                emit("timeout", null);
             }
             else {
                 timeLeft -= 1;

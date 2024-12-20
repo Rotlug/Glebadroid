@@ -77,17 +77,17 @@ public class Node {
         signals.get(signalName).add(dest);
     }
 
-    public void emit(String signalName) {
+    public void emit(String signalName, Object params) {
         if (signals.get(signalName) == null) return;
 
         ArrayList<Node> nodeList = signals.get(signalName);
         for (int i = 0; i < nodeList.size(); i++) {
             Node node = nodeList.get(i);
-            node.onSignal(signalName, this);
+            node.onSignal(signalName, this, params);
         }
     }
 
-    public void onSignal(String signalName, Node signalSource) {}
+    public void onSignal(String signalName, Node signalSource, Object params) {}
 
     // Destroy node
     public void destroySelf() {
