@@ -3,6 +3,7 @@ package com.rotlug.glebadroid;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 
 /*
 Node2D is a node that draws a bitmap on the canvas.
@@ -60,12 +61,12 @@ public class Node2D extends Node {
 
     // Draw the bitmap
     @Override
-    public void update(Canvas canvas) {
+    public void update(Canvas canvas, MotionEvent motionEvent) {
         if (bitmap == null) {
             throw new IllegalArgumentException("Bitmap is null");
         }
         draw(canvas);
-        super.update(canvas);
+        super.update(canvas, motionEvent);
     }
 
     public void draw(Canvas canvas) {

@@ -1,6 +1,7 @@
 package com.rotlug.glebadroid;
 
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -28,13 +29,13 @@ public class Node {
         }
     }
 
-    public void update(Canvas canvas) {
+    public void update(Canvas canvas, MotionEvent motionEvent) {
         if (canvas == null) return;
 
         // Update all children when updated.
         for (int i = 0; i < children.size(); i++) {
             Node child = children.get(i);
-            child.update(canvas);
+            child.update(canvas, motionEvent);
         }
     }
 

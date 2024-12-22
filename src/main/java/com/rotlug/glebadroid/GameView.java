@@ -17,7 +17,7 @@ public class GameView extends View {
     private final int delayMs;
     private final int frameRate;
 
-    private MotionEvent touchEvent;
+    private MotionEvent motionEvent;
     private final BackgroundColor bgRect;
 
     public GameView(Context context, int frameRate, int backgroundColor) {
@@ -57,19 +57,19 @@ public class GameView extends View {
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
-        rootNode.update(canvas);
+        rootNode.update(canvas, motionEvent);
     }
 
     // Touch events
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        this.touchEvent = event;
+        this.motionEvent = event;
         return super.onTouchEvent(event);
     }
 
-    public MotionEvent getTouchEvent() {
-        return touchEvent;
+    public MotionEvent getMotionEvent() {
+        return motionEvent;
     }
 
     // Other Getters

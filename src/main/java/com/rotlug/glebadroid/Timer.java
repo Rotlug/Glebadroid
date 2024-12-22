@@ -1,6 +1,7 @@
 package com.rotlug.glebadroid;
 
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
 public class Timer extends Node {
     private int timeLeft;
@@ -12,7 +13,7 @@ public class Timer extends Node {
     }
 
     @Override
-    public void update(Canvas canvas) {
+    public void update(Canvas canvas, MotionEvent motionEvent) {
         if (isActive) {
             if (timeLeft == 0) {
                 isActive = false;
@@ -22,7 +23,7 @@ public class Timer extends Node {
                 timeLeft -= 1;
             }
         }
-        super.update(canvas);
+        super.update(canvas, motionEvent);
     }
 
     public float getSecondsLeft() {
