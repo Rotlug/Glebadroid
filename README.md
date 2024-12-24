@@ -43,6 +43,6 @@ class DownRect extends ColorRect {
 ```
 
 כדי להוסיף את העצם הזה למשחק:
-```
+```java
 gameView.getRootNode().addChild(new DownRect());
 ```
