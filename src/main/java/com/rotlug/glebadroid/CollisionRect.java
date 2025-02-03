@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /*
 CollisionRect is a Node that can check for collisions with other
@@ -88,6 +90,10 @@ public class CollisionRect extends Node {
 
     public Vector2 getSize() {
         return parent2D.getSize();
+    }
+
+    public List<Node2D> getCollidingObjects() {
+        return Collections.unmodifiableList(collidingObjects);
     }
 }
 
