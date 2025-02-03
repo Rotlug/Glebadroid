@@ -54,6 +54,7 @@ public class CollisionRect extends Node {
     }
 
     public boolean isCollidingWith(CollisionRect other) {
+        if (other.getPosition() == null) return false;
         if (this.getPosition().x + this.getSize().x <= other.getPosition().x ||
                 other.getPosition().x + other.getSize().x <= this.getPosition().x) {
             return false;
@@ -81,7 +82,8 @@ public class CollisionRect extends Node {
 
     // Getters for position & size of the parent
     public Vector2 getPosition() {
-        return parent2D.position;
+        // System.out.printf("Global position: %s%n", parent2D.getGlobalPosition());
+        return parent2D.getGlobalPosition();
     }
 
     public Vector2 getSize() {

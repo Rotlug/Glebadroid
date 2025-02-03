@@ -11,6 +11,7 @@ it also supports rotating the bitmap.
  */
 public class Node2D extends Node {
     public Vector2 position;
+    private Vector2 globalPosition;
 
     private int alpha;
     private float rotation;
@@ -65,6 +66,7 @@ public class Node2D extends Node {
         if (bitmap == null) {
             throw new IllegalArgumentException("Bitmap is null");
         }
+        this.globalPosition = findGlobalPosition();
         draw(canvas);
         super.update(canvas, motionEvent);
     }
@@ -77,18 +79,17 @@ public class Node2D extends Node {
         state. this is more efficient than rotating the actual bitmap.
          */
         canvas.save();
-        canvas.rotate(rotation, position.x, position.y);
-        if (alpha == 255) canvas.drawBitmap(bmp, position.x, position.y, null);
+        canvas.rotate(rotation, globalPosition.x, globalPosition.y);
+        if (alpha == 255) canvas.drawBitmap(bmp, globalPosition.x, globalPosition.y, null);
         else drawWithOpacity(canvas);
         canvas.restore();
     }
-
 
     // Opacity
     private void drawWithOpacity(Canvas canvas) {
         Paint paint = new Paint();
         paint.setAlpha(alpha);
-        canvas.drawBitmap(bitmap, position.x, position.y, paint);
+        canvas.drawBitmap(bitmap, globalPosition.x, globalPosition.y, paint);
     }
 
     public int getAlpha() {
@@ -100,5 +101,22 @@ public class Node2D extends Node {
             throw new RuntimeException("Error: Alpha can't be set below 0");
         }
         this.alpha = (alpha % 256);
+    }
+
+    private Vector2 findGlobalPosition() {
+        Vector2 pos = new Vector2(position.x, position.y);
+        Node2D node = this;
+
+        while (node.getParent() instanceof Node2D) {
+            node = (Node2D) node.getParent();
+            pos.x += node.position.x;
+            pos.y += node.position.y;
+        }
+
+        return pos;
+    }
+
+    public Vector2 getGlobalPosition() {
+        return globalPosition;
     }
 }
