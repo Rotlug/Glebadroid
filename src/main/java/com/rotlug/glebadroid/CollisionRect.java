@@ -16,6 +16,9 @@ public class CollisionRect extends Node {
     // Number of collisions in this frame
     int numCollisions;
 
+    // List of all current colliding objects
+    ArrayList<Node2D> collidingObjects;
+
     @Override
     public void onReady() {
         super.onReady();
@@ -26,6 +29,7 @@ public class CollisionRect extends Node {
         parent2D = (Node2D) getParent();
         colPool = CollisionPool.getInstance();
         numCollisions = 0;
+        collidingObjects = new ArrayList<>();
 
         colPool.getCollisionRects().add(this);
         connect("collision", parent2D);
@@ -36,13 +40,15 @@ public class CollisionRect extends Node {
         super.update(canvas, motionEvent);
         // Check for collisions with every collision object in the pool
         numCollisions = 0;
+        collidingObjects.clear();
 
         for (int i = 0; i < colPool.getCollisionRects().size(); i++) {
             CollisionRect collisionRect = colPool.getCollisionRects().get(i);
             if (collisionRect == this) continue;
             if (isCollidingWith(collisionRect)) {
                 numCollisions++;
-                emit("collision", collisionRect);
+                collidingObjects.add((Node2D)collisionRect.getParent());
+                emit("collision", collisionRect.getParent());
             }
         }
     }
