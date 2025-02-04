@@ -40,6 +40,10 @@ public class CollisionRect extends Node {
     @Override
     public void update(Canvas canvas, MotionEvent motionEvent) {
         super.update(canvas, motionEvent);
+        checkCollisions();
+    }
+
+    public void checkCollisions() {
         // Check for collisions with every collision object in the pool
         numCollisions = 0;
         collidingObjects.clear();
