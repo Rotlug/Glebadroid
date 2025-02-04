@@ -113,4 +113,17 @@ public class Node {
     public String getName() {
         return name;
     }
+
+    // Debug
+    private void printTree(String indent) {
+        String newIndent = "---" + indent;
+        // print self
+        System.out.printf("%s%s%n", indent, name);
+        for (int i = 0; i < children.size(); i++) {
+            Node child = children.get(i);
+            child.printTree(newIndent);
+        }
+    }
+
+    public void printTree() { printTree(""); }
 }
