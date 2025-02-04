@@ -114,6 +114,39 @@ public class Node {
         return name;
     }
 
+    // Get Node by path (example: ~/UI/MoveRightButton or ../../Player)
+    public Node find(String path) {
+        String[] nodeNames = path.split("/");
+        Node result = this;
+
+        for (int i = 0; i < nodeNames.length; i++) {
+            String name = nodeNames[i];
+            switch (name) {
+                case "~":
+                    result = getGameView().getRootNode();
+                    break;
+                case "..":
+                    result = result.getParent();
+                    break;
+                default:
+                    boolean found = false;
+                    for (int j = 0; j < result.getChildren().size(); j++) {
+                        Node child = result.getChildren().get(j);
+                        if (child.getName().equals(name)) {
+                            result = child;
+                            found = true;
+                            break;
+                        };
+                    }
+                    if (!found) {
+                        throw new RuntimeException("Error: Node not found: " + name);
+                    }
+                    break;
+            }
+        }
+        return result;
+    }
+
     // Debug
     private void printTree(String indent) {
         String newIndent = "---" + indent;
