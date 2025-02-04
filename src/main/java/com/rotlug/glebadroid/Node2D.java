@@ -63,11 +63,8 @@ public class Node2D extends Node {
     // Draw the bitmap
     @Override
     public void update(Canvas canvas, MotionEvent motionEvent) {
-        if (bitmap == null) {
-            throw new IllegalArgumentException("Bitmap is null");
-        }
         this.globalPosition = findGlobalPosition();
-        draw(canvas);
+        if (bitmap != null) draw(canvas);
         super.update(canvas, motionEvent);
     }
 
