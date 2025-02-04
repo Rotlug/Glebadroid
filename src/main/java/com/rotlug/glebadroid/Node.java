@@ -139,7 +139,7 @@ public class Node {
                         };
                     }
                     if (!found) {
-                        throw new RuntimeException("Error: Node not found: " + name);
+                        return null;
                     }
                     break;
             }
