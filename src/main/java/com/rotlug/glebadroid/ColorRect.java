@@ -9,7 +9,7 @@ import android.graphics.Rect;
 /*
 ColorRect is a node that can draw a colored rectangle on the canvas (Mainly used for debugging)
  */
-public class ColorRect extends Node2D {
+public class ColorRect extends Bitmap2D {
     private int color;
 
     public ColorRect(int color) {

@@ -6,35 +6,32 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 
 /*
 CollisionRect is a Node that can check for collisions with other
 CollisionRects
  */
-public class CollisionRect extends Node {
-    Node2D parent2D;
-    CollisionPool colPool;
+public class CollisionRect extends Node2D {
+    private CollisionPool colPool;
+    private Vector2 size;
 
     // Number of collisions in this frame
     int numCollisions;
 
     // List of all current colliding objects
-    ArrayList<Node2D> collidingObjects;
+    ArrayList<CollisionRect> collidingObjects;
 
     @Override
     public void onReady() {
         super.onReady();
-        if (!(getParent() instanceof Node2D)) {
-            throw new RuntimeException("Error: Parent of collisionRect is not a Node2D");
-        }
 
-        parent2D = (Node2D) getParent();
         colPool = CollisionPool.getInstance();
         numCollisions = 0;
         collidingObjects = new ArrayList<>();
 
+        setSize(0, 0);
         colPool.getCollisionRects().add(this);
-        connect("collision", parent2D);
     }
 
     @Override
@@ -53,26 +50,24 @@ public class CollisionRect extends Node {
             if (collisionRect == this) continue;
             if (isCollidingWith(collisionRect)) {
                 numCollisions++;
-                collidingObjects.add((Node2D)collisionRect.getParent());
+                collidingObjects.add(collisionRect);
                 emit("collision", collisionRect.getParent());
             }
         }
     }
 
     public boolean isCollidingWith(CollisionRect other) {
-        if (other.getPosition() == null) return false;
-        if (this.getPosition().x + this.getSize().x <= other.getPosition().x ||
-                other.getPosition().x + other.getSize().x <= this.getPosition().x) {
+        if (this.getSize() == null) return false;
+        if (other.getGlobalPosition() == null) return false;
+        
+        if (this.getGlobalPosition().x + this.getSize().x <= other.getGlobalPosition().x ||
+                other.getGlobalPosition().x + other.getSize().x <= this.getGlobalPosition().x) {
             return false;
         }
 
         // Check if one rectangle is above or below the other
-        if (this.getPosition().y >= other.getPosition().y + other.getSize().y ||
-                other.getPosition().y >= this.getPosition().y + this.getSize().y) {
-            return false;
-        }
-
-        return true;
+        return !(this.getGlobalPosition().y >= other.getGlobalPosition().y + other.getSize().y) &&
+                !(other.getGlobalPosition().y >= this.getGlobalPosition().y + this.getSize().y);
     }
 
     public int getNumCollisions() {
@@ -86,18 +81,21 @@ public class CollisionRect extends Node {
         colPool.getCollisionRects().remove(this);
     }
 
-    // Getters for position & size of the parent
-    public Vector2 getPosition() {
-        // System.out.printf("Global position: %s%n", parent2D.getGlobalPosition());
-        return parent2D.getGlobalPosition();
+    public List<CollisionRect> getCollidingObjects() {
+        return Collections.unmodifiableList(collidingObjects);
+    }
+
+    // Size
+    public void setSize(Vector2 size) {
+        this.size = size;
+    }
+
+    public void setSize(float x, float y) {
+        this.size = new Vector2(x, y);
     }
 
     public Vector2 getSize() {
-        return parent2D.getSize();
-    }
-
-    public List<Node2D> getCollidingObjects() {
-        return Collections.unmodifiableList(collidingObjects);
+        return size;
     }
 }
 

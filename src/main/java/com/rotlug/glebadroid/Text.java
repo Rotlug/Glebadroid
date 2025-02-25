@@ -7,7 +7,7 @@ import android.graphics.Paint;
 /*
 Text is a node that draws text on the canvas
  */
-public class Text extends Node2D {
+public class Text extends Bitmap2D {
     private String text;
     private int color;
     private int textSize;
