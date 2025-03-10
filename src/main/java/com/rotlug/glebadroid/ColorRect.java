@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.view.MotionEvent;
 
 /*
 ColorRect is a node that can draw a colored rectangle on the canvas (Mainly used for debugging)

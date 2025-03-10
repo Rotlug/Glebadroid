@@ -3,18 +3,20 @@ package com.rotlug.glebadroid;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
+/*
+Node2D is a node that draws a bitmap on the canvas.
+it also supports rotating the bitmap.
+ */
 public class Node2D extends Node {
     public Vector2 position;
-    private Vector2 globalPosition;
+    Vector2 globalPosition;
 
     @Override
     public void onReady() {
         this.position = new Vector2(0, 0);
-        this.globalPosition = findGlobalPosition();
         super.onReady();
     }
 
-    // Draw the bitmap
     @Override
     public void update(Canvas canvas, MotionEvent motionEvent) {
         this.globalPosition = findGlobalPosition();
