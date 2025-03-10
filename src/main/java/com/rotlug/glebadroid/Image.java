@@ -17,7 +17,12 @@ public class Image extends Bitmap2D {
 
     @Override
     public void onReady() {
-        setBitmap(BitmapFactory.decodeResource(context.getResources(), resourceId));
+        setImage(resourceId);
         super.onReady();
+    }
+
+    public void setImage(int id) {
+        resourceId = id;
+        setBitmap(BitmapFactory.decodeResource(context.getResources(), resourceId));
     }
 }
