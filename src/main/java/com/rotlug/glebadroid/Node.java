@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.HashSet;
 import java.util.Hashtable;
 
 /*
@@ -16,12 +17,16 @@ public class Node {
     private Node parent;
     private String name;
 
+    private HashSet<String> tags;
+
     Dictionary<String, ArrayList<Node>> signals;
 
     public Node() {
         this.children = new ArrayList<>();
         this.signals = new Hashtable<>();
         this.name = getClass().getSimpleName();
+
+        this.tags = new HashSet<>();
     }
 
     public void onReady() {
@@ -159,4 +164,9 @@ public class Node {
     }
 
     public void printTree() { printTree(""); }
+
+    // Tags
+    public HashSet<String> getTags() {
+        return tags;
+    }
 }
