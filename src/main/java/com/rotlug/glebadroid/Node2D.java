@@ -9,6 +9,7 @@ it also supports rotating the bitmap.
  */
 public class Node2D extends Node {
     public Vector2 position;
+
     Vector2 globalPosition;
 
     @Override

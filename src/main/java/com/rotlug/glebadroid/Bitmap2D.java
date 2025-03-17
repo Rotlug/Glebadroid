@@ -2,12 +2,15 @@ package com.rotlug.glebadroid;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 
 public class Bitmap2D extends SizedNode2D {
     private int alpha;
     private float rotation;
+
+    public Vector2 scale = new Vector2(1, 1);
 
     private Bitmap bitmap;
 
@@ -63,8 +66,12 @@ public class Bitmap2D extends SizedNode2D {
         state. this is more efficient than rotating the actual bitmap.
          */
         canvas.save();
+        Matrix matrix = new Matrix();
+        matrix.postScale(scale.x, scale.y, getSize().x / 2, getSize().y / 2);
+        matrix.postTranslate(globalPosition.x, globalPosition.y);
+
         canvas.rotate(rotation, globalPosition.x, globalPosition.y);
-        if (alpha == 255) canvas.drawBitmap(bmp, globalPosition.x, globalPosition.y, null);
+        if (alpha == 255) canvas.drawBitmap(bmp, matrix, null);
         else drawWithOpacity(canvas);
         canvas.restore();
     }
