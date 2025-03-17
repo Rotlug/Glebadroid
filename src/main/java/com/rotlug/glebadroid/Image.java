@@ -10,13 +10,13 @@ public class Image extends Bitmap2D {
     Context context;
     int resourceId;
 
-    public Image(Context context, int resourceId) {
-        this.context = context;
+    public Image(int resourceId) {
         this.resourceId = resourceId;
     }
 
     @Override
     public void onReady() {
+        this.context = getGameView().getContext();
         setImage(resourceId);
         super.onReady();
     }
