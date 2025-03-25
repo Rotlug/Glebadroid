@@ -45,7 +45,7 @@ public class GameView extends View {
                 invalidate();
 
                 // Schedule the next frame
-                choreographer.postFrameCallbackDelayed(this, delayMs); // Adjust delay for desired FPS
+                choreographer.postFrameCallbackDelayed(this, delayMs);
             }
         };
 

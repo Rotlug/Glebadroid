@@ -37,8 +37,8 @@ public class CollisionRect extends Node {
         colPool.getCollisionRects().add(this);
         connect("collision", parent2D);
 
-        ColorRect debugRect = (ColorRect) parent2D.addChild(new ColorRect(Color.RED));
-        debugRect.setSize(parent2D.getSize());
+//        ColorRect debugRect = (ColorRect) parent2D.addChild(new ColorRect(Color.RED));
+//        debugRect.setSize(parent2D.getSize());
     }
 
     @Override
