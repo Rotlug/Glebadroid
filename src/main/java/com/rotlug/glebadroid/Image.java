@@ -16,7 +16,7 @@ public class Image extends Bitmap2D {
 
     @Override
     public void onReady() {
-        this.context = getGameView().getContext();
+        this.context = getContext();
         setImage(resourceId);
         super.onReady();
     }
