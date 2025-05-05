@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 @SuppressLint("ViewConstructor")
 public class GameView extends View {
     private final Node rootNode;
+    private final float density;
     private final Vector2 screenSize;
     private final int delayMs;
     private final int frameRate;
@@ -28,6 +29,8 @@ public class GameView extends View {
 
         this.delayMs = 1000 / frameRate;
         this.frameRate = frameRate;
+
+        this.density = context.getResources().getDisplayMetrics().density;
 
         // A Choreographer object is needed to make sure the game runs at the specified frame rate.
         Choreographer choreographer = Choreographer.getInstance();
@@ -83,6 +86,10 @@ public class GameView extends View {
 
     public Vector2 getScreenSize() {
         return screenSize;
+    }
+
+    public float getDensity() {
+        return density;
     }
 
     // Background Color

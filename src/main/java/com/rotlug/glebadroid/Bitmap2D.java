@@ -68,9 +68,12 @@ public class Bitmap2D extends SizedNode2D {
         canvas.save();
         Matrix matrix = new Matrix();
         matrix.postScale(scale.x, scale.y, getSize().x / 2, getSize().y / 2);
-        matrix.postTranslate(globalPosition.x, globalPosition.y);
 
-        canvas.rotate(rotation, globalPosition.x, globalPosition.y);
+        Vector2 newPos = new Vector2(globalPosition.x * getGameView().getDensity(), globalPosition.y * getGameView().getDensity());
+
+        matrix.postTranslate(newPos.x, newPos.y);
+
+        canvas.rotate(rotation, newPos.x, newPos.y);
         if (alpha == 255) canvas.drawBitmap(bmp, matrix, null);
         else drawWithOpacity(canvas);
         canvas.restore();
