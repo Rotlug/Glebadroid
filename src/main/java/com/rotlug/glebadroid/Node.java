@@ -47,7 +47,7 @@ public class Node {
         }
     }
 
-    public Node addChild(Node child) {
+    public <T extends Node> T addChild(T child) {
         child.setParent(this);
         children.add(child);
         child.setGameView(gameView);
