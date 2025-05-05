@@ -74,16 +74,19 @@ public class Bitmap2D extends SizedNode2D {
         matrix.postTranslate(newPos.x, newPos.y);
 
         canvas.rotate(rotation, newPos.x, newPos.y);
-        if (alpha == 255) canvas.drawBitmap(bmp, matrix, null);
-        else drawWithOpacity(canvas);
+        Paint paint = new Paint();
+        paint.setFilterBitmap(false);
+        paint.setAlpha(alpha);
+
+        canvas.drawBitmap(bmp, matrix, paint);
         canvas.restore();
     }
 
-    private void drawWithOpacity(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setAlpha(alpha);
-        canvas.drawBitmap(bitmap, globalPosition.x, globalPosition.y, paint);
-    }
+//    private void drawWithOpacity(Canvas canvas) {
+//        Paint paint = new Paint();
+//        paint.setAlpha(alpha);
+//        canvas.drawBitmap(bitmap, globalPosition.x, globalPosition.y, paint);
+//    }
 
     // Alpha
     public int getAlpha() {
