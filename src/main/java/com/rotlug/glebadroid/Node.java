@@ -1,5 +1,6 @@
 package com.rotlug.glebadroid;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
@@ -168,5 +169,10 @@ public class Node {
     // Tags
     public HashSet<String> getTags() {
         return tags;
+    }
+
+    // Context
+    public Context getContext() {
+        return getGameView().getContext();
     }
 }
