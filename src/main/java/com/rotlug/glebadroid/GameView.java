@@ -87,6 +87,9 @@ public class GameView extends View {
     public Vector2 getScreenSize() {
         return screenSize;
     }
+    public Vector2 getScreenSizeWithDensity() {
+        return new Vector2(screenSize.x / density, screenSize.y / density);
+    }
 
     public float getDensity() {
         return density;
