@@ -69,7 +69,7 @@ public class Bitmap2D extends SizedNode2D {
         Matrix matrix = new Matrix();
         matrix.postScale(scale.x, scale.y, getSize().x / 2, getSize().y / 2);
 
-        Vector2 newPos = new Vector2(globalPosition.x * getGameView().getDensity(), globalPosition.y * getGameView().getDensity());
+        Vector2 newPos =  getGlobalPositionWithDensity();
 
         matrix.postTranslate(newPos.x, newPos.y);
 

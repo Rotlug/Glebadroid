@@ -40,4 +40,9 @@ public class Node2D extends Node {
     public Vector2 getGlobalPosition() {
         return globalPosition;
     }
+
+    public Vector2 getGlobalPositionWithDensity() {
+        if (globalPosition == null) return null;
+        return new Vector2(globalPosition.x * getGameView().getDensity(), globalPosition.y * getGameView().getDensity());
+    }
 }

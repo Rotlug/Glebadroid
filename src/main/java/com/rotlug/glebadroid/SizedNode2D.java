@@ -1,7 +1,7 @@
 package com.rotlug.glebadroid;
 
 public class SizedNode2D extends Node2D {
-    private Vector2 size;
+    Vector2 size;
 
     public void setSize(Vector2 size) {
         this.size = size;
@@ -13,5 +13,15 @@ public class SizedNode2D extends Node2D {
 
     public Vector2 getSize() {
         return size;
+    }
+
+    public Vector2 getSizeWithDensity() {
+        return new Vector2(size.x / getGameView().getDensity(), size.y / getGameView().getDensity());
+    }
+
+    public void debugPrint() {
+        System.out.println("MY NAME IS: " + getName());
+        System.out.println("MY SIZE IS: " + getSize());
+        System.out.println("MY POSITION IS: " + position);
     }
 }

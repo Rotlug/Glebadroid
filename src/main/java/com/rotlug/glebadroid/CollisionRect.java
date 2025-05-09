@@ -37,7 +37,7 @@ public class CollisionRect extends Node {
         colPool.getCollisionRects().add(this);
         connect("collision", parent2D);
 
-        ColorRect debugRect = (ColorRect) parent2D.addChild(new ColorRect(Color.RED));
+        ColorRect debugRect = parent2D.addChild(new ColorRect(Color.RED));
         debugRect.setSize(parent2D.getSize());
     }
 
@@ -92,7 +92,7 @@ public class CollisionRect extends Node {
 
     // Getters for position & size of the parent
     public Vector2 getPosition() {
-        return parent2D.getGlobalPosition();
+        return parent2D.getGlobalPositionWithDensity();
     }
 
     public Vector2 getSize() {
