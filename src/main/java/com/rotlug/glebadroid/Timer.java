@@ -5,7 +5,7 @@ import android.view.MotionEvent;
 
 public class Timer extends Node {
     private int timeLeft;
-    private boolean isActive;
+    private boolean isActive = false;
 
     public void startTimer(double seconds) {
         timeLeft = (int) (seconds * getGameView().getFrameRate());
