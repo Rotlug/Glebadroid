@@ -11,7 +11,6 @@ public class Bitmap2D extends SizedNode2D {
     private float rotation;
 
     public Vector2 scale = new Vector2(1, 1);
-
     private Bitmap bitmap;
 
     @Override
@@ -72,6 +71,10 @@ public class Bitmap2D extends SizedNode2D {
         Vector2 newPos =  getGlobalPositionWithDensity();
 
         matrix.postTranslate(newPos.x, newPos.y);
+
+        Vector2 newOffset = getGlobalOffsetWithDensity();
+
+        matrix.postTranslate(newOffset.x, newOffset.y);
 
         canvas.rotate(rotation, newPos.x, newPos.y);
         Paint paint = new Paint();

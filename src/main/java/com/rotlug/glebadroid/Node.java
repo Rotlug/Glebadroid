@@ -121,7 +121,7 @@ public class Node {
     }
 
     // Get Node by path (example: ~/UI/MoveRightButton or ../../Player)
-    public Node find(String path) {
+    public <T extends Node> T find(String path) {
         String[] nodeNames = path.split("/");
         Node result = this;
 
@@ -150,7 +150,7 @@ public class Node {
                     break;
             }
         }
-        return result;
+        return (T) result;
     }
 
     // Debug
